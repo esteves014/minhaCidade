@@ -1,6 +1,11 @@
 package com.example.minhacidade.ui;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.minhacidade.R;
 import com.example.minhacidade.data.Cidade;
@@ -54,10 +60,10 @@ public class MapaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        // O servidor de tiles do OSM exige um User-Agent próprio; o cache fica no armazenamento do app
-        // (não precisa de permissão de armazenamento).
+        // O servidor de tiles do OSM bloqueia (HTTP 403) User-Agent genérico, como só o applicationId:
+        // é preciso identificar o aplicativo. O cache fica no armazenamento do app (sem permissão extra).
         IConfigurationProvider config = Configuration.getInstance();
-        config.setUserAgentValue(getPackageName());
+        config.setUserAgentValue(agenteDeUsuario());
         File base = new File(getCacheDir(), "osmdroid");
         File tiles = new File(base, "tiles");
         if (tiles.isDirectory() || tiles.mkdirs()) {
@@ -145,6 +151,7 @@ public class MapaActivity extends AppCompatActivity {
         List<GeoPoint> pontos = new ArrayList<>();
         long foco = getIntent().getLongExtra(Ui.EXTRA_ID, -1);
         Denuncia focada = null;
+        Drawable icone = iconeDoMarcador();
         for (Denuncia d : todas) {
             if (!d.temLocalizacao()) {
                 continue;
@@ -153,6 +160,7 @@ public class MapaActivity extends AppCompatActivity {
             pontos.add(ponto);
             Marker marcador = new Marker(mapa);
             marcador.setPosition(ponto);
+            marcador.setIcon(icone);
             marcador.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             marcador.setTitle(d.categoria);
             marcador.setOnMarkerClickListener((m, view) -> {
@@ -188,6 +196,28 @@ public class MapaActivity extends AppCompatActivity {
         Ui.aplicarStatus(findViewById(R.id.card_status), d.status);
         findViewById(R.id.btn_abrir).setOnClickListener(v -> startActivity(
                 new Intent(this, DenunciaDetalheActivity.class).putExtra(Ui.EXTRA_ID, d.id)));
+    }
+
+    /** Ex.: "minhaCidade/1.0 (Android; prototipo academico)". */
+    private String agenteDeUsuario() {
+        String versao = "1.0";
+        try {
+            versao = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException ignorada) {
+            // mantém a versão padrão
+        }
+        return getString(R.string.app_name) + "/" + versao + " (Android; prototipo academico)";
+    }
+
+    /** Alfinete do app (o ícone padrão do osmdroid é uma mão verde), desenhado em 40 dp. */
+    private Drawable iconeDoMarcador() {
+        Drawable pin = ContextCompat.getDrawable(this, R.drawable.ic_pin).mutate();
+        pin.setTint(ContextCompat.getColor(this, R.color.status_aberta));
+        int px = Math.round(40 * getResources().getDisplayMetrics().density);
+        Bitmap bitmap = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888);
+        pin.setBounds(0, 0, px, px);
+        pin.draw(new Canvas(bitmap));
+        return new BitmapDrawable(getResources(), bitmap);
     }
 
     // ---- Câmera ----
