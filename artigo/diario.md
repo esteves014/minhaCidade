@@ -11,6 +11,7 @@ Regra: a cada alteração no app, acrescentar uma linha aqui e atualizar as seç
 | 2026-11-02 | 1.0 (banco v3→v4) | **Mapa e geolocalização das denúncias**: coordenadas opcionais em `denuncias` e `cidades`; "Usar minha localização" (GPS, sob demanda) e "Escolher no mapa" na nova denúncia; tela de mapa (osmdroid + OpenStreetMap) com as denúncias do cidadão; "Ver no mapa" no detalhe; atribuição OSM. Em paralelo, outra frente adicionou endereço residencial opcional (com coordenadas) ao perfil como atalho na nova denúncia (RF13). | 1 (resumo), 4.1 (RF11–RF13), 4.2, 4.3, 4.6, 5.1, 5.3, 5.4, 6, 7, 8, Refs | 16.6, 11.3 (potencial); 11.2, 11.6, 11.7 (indiretas, já mapeadas) |
 | 2026-11-02 | 1.0 (banco v4) | **Endereço do cidadão e "usar minha localização" no perfil**: `usuarios` ganha `endereco`, `latitude`, `longitude` (opcionais); no Editar perfil, o botão "Usar minha localização atual" obtém a posição (sob demanda, com permissão) e a converte em "Rua, número - Bairro" pelo `Geocoder` do aparelho (`LocalizadorDeEndereco`, `EnderecoTexto`); se o geocoder falhar, usa as coordenadas como texto. Na nova denúncia, "Usar meu endereço cadastrado" e preenchimento automático do endereço a partir do GPS/mapa quando o campo está vazio. Testes: `EnderecoTextoTest`. Corpo do artigo atualizado (RF13–RF14, Seções 4.2, 6 e 7; 13 testes unitários, 0 falhas). | 4.1 (RF13), 4.3, 4.6, 7 (limitações: o `Geocoder` envia coordenadas a serviço do sistema; endereço e coordenadas em texto claro) | 11.2, 11.6 (indiretas, já mapeadas) |
 | 2026-11-03 | 1.0 (banco v4) | **Endereço da denúncia pela localização atual**: na nova denúncia, "Usar minha localização" agora sempre substitui o endereço pelo do local atual (antes só preenchia se o campo estivesse vazio); se o geocoder falhar, usa as coordenadas como texto e avisa; ponto do mapa preenche só se o campo estiver vazio ou com endereço automático; busca obsoleta é descartada; título da seção passa a "Localização da ocorrência (opcional)". Verificado só por compilação e testes unitários (sem teste em aparelho). | 4.1 (RF14), 4.2, 6 | 16.6 (potencial, já mapeado) |
+| 2026-11-03 | 1.0 (banco v4) | **Formato do artigo passa a seguir o template de TCC da Fatec Lins** (`template-artigo.docx`): capa, folha de rosto, folha de aprovação, sumário automático, título/autoria/afiliação, RESUMO e ABSTRACT, seções em Arial. `gerar-docx.js` agora preenche o template (antes gerava um Word aproximado da SBC do zero); `atualizar-sumario.ps1` atualiza o sumário via Word. Em `artigo.md`: linhas `Autor/Orientador/Curso/Semestre/ano` no cabeçalho, palavras-chave separadas por ponto, citações entre parênteses em caixa alta (ABNT), referências em ordem alfabética, legendas `Quadro:` com fonte nas tabelas e no bloco SQL. Sem mudança no app. | Cabeçalho (v0.4), Resumo/Abstract (palavras-chave), 3.1 e 8 (citações), Referências (ordem), 4.1, 5.1, 5.2 e 5.3 (legendas) | — |
 
 ## Pendências do artigo
 
@@ -19,12 +20,13 @@ Regra: a cada alteração no app, acrescentar uma linha aqui e atualizar as seç
 - [ ] Capturas de tela e execução em dispositivo (Seção 6)
 - [ ] Testes de interface/integração (existem 13 unitários: CPF, seed e formatação de endereço)
 - [ ] Conferir todas as referências e itens `[VERIFICAR]`
-- [ ] Definir veículo/evento de submissão e adaptar o modelo (SBC, periódico, etc.)
+- [ ] Preencher autor, orientador, curso e semestre/ano (linhas no início de `artigo.md`; hoje saem como `[A COMPLETAR]` na capa)
+- [ ] Modelo da Fatec pede o texto todo com 15 a 20 páginas: a versão 0.4 tem 15 (4 de capa/folhas/sumário + 11 de corpo); conferir após completar 2.3, 6 e 8
 - [ ] Decidir se haverá avaliação com usuários (e, se sim, ética em pesquisa)
 - [ ] Capturas de tela do mapa para o artigo (fluxo já testado em emulador; GPS real ainda não testado)
 - [ ] Decidir a política do mapa: manter só as denúncias do próprio cidadão ou criar mapa público moderado
 - [ ] Definir retenção/compartilhamento de coordenadas (LGPD) e provedor de tiles para produção
-- [ ] Gerar versão .docx no modelo SBC
+- [x] Gerar versão .docx no modelo do TCC da Fatec Lins (`artigo.docx`)
 
 ## Pontos do código que viram "limitações" no artigo (a reavaliar a cada ciclo)
 

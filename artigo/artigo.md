@@ -1,5 +1,5 @@
 ---
-versao_artigo: 0.3
+versao_artigo: 0.4
 data: 2026-11-03
 versao_app: 1.0 (versionCode 1; esquema do banco v4)
 status: rascunho em evolução — atualizado junto com o código
@@ -7,7 +7,13 @@ status: rascunho em evolução — atualizado junto com o código
 
 # minhaCidade: um aplicativo móvel municipal para vagas de emprego, notícias locais e denúncias urbanas, e sua contribuição aos Objetivos de Desenvolvimento Sustentável
 
-**Autor:** [A COMPLETAR: nome completo] — [A COMPLETAR: instituição / curso / e-mail]
+**Autor:** [A COMPLETAR: nome completo do aluno]
+
+**Orientador:** [A COMPLETAR: titulação e nome do orientador]
+
+**Curso:** [A COMPLETAR: nome do curso superior de tecnologia]
+
+**Semestre/ano:** [A COMPLETAR: Xº semestre/ano da entrega do TCC]
 
 > **Convenções deste documento.** `[A COMPLETAR]` marca informação que só o autor pode fornecer.
 > `[VERIFICAR]` marca afirmação externa que precisa ser conferida na fonte antes da submissão.
@@ -30,8 +36,8 @@ indireta ou potencial e propondo indicadores calculáveis a partir do próprio m
 versão atual (protótipo com dados fictícios para três cidades paulistas) não há avaliação com usuários;
 o trabalho registra o alinhamento projetado, as limitações e o plano de validação.
 
-**Palavras-chave:** governo digital; participação cidadã; Objetivos de Desenvolvimento Sustentável;
-aplicativo móvel; municípios de pequeno porte; Android.
+**Palavras-chave:** Governo digital. Participação cidadã. Objetivos de Desenvolvimento Sustentável.
+Aplicativo móvel. Municípios de pequeno porte. Android.
 
 ## Abstract
 
@@ -46,8 +52,8 @@ contribution, and paired with indicators computable from the app's own data mode
 version is a prototype with fictitious data for three cities in São Paulo state and has not been
 evaluated with users; the paper documents the projected alignment, limitations and validation plan.
 
-**Keywords:** digital government; citizen participation; Sustainable Development Goals; mobile
-application; small municipalities; Android.
+**Keywords:** Digital government. Citizen participation. Sustainable Development Goals. Mobile
+application. Small municipalities. Android.
 
 ---
 
@@ -114,7 +120,7 @@ Definir critérios de inclusão, bases consultadas e período. Não preencher se
 
 ### 3.1 Design Science Research
 
-Adota-se *Design Science Research* (Hevner et al., 2004), seguindo as atividades de Peffers et al.
+Adota-se *Design Science Research* (HEVNER et al., 2004), seguindo as atividades de Peffers et al.
 (2007): identificação do problema, definição dos objetivos, projeto e desenvolvimento do artefato,
 demonstração, avaliação e comunicação. O desenvolvimento é incremental; cada ciclo é registrado no
 Diário de Desenvolvimento (arquivo `artigo/diario.md`) e refletido neste texto, de modo que o artigo
@@ -143,6 +149,8 @@ mecanismo nem medição.
 ## 4 O artefato: minhaCidade
 
 ### 4.1 Requisitos funcionais (versão 1.0)
+
+Quadro: Requisitos funcionais da versão 1.0 | Fonte: elaborado pelo autor, a partir do código-fonte da versão 1.0.
 
 | Id | Requisito | Módulo |
 |----|-----------|--------|
@@ -229,6 +237,8 @@ com a prefeitura. Cada cidadão só consegue abrir as próprias denúncias.
 
 ### 5.1 Matriz funcionalidade × meta
 
+Quadro: Matriz funcionalidade × meta ODS | Fonte: elaborado pelo autor, com base nas metas da Agenda 2030 (ONU, 2015).
+
 | Funcionalidade (requisito) | Meta ODS (resumo do texto oficial) | Tipo | Mecanismo | Indicador proposto |
 |---|---|---|---|---|
 | Vagas locais por tipo (RF4–RF5) | **8.5** emprego pleno e produtivo e trabalho decente para todos, incluindo jovens | Indireta | Reduz o custo de busca por vagas formais da própria cidade | Vagas publicadas e acessos por cidade |
@@ -245,6 +255,8 @@ com a prefeitura. Cada cidadão só consegue abrir as próprias denúncias.
 | App gratuito ao cidadão, em celular (todos) | **9.c** ampliar o acesso às TIC; **10.2** inclusão de todos | Potencial (e com ressalva: ver 5.4) | Serviços públicos acessíveis por celular | Usuários cadastrados / população da cidade `[A COLETAR]` |
 
 ### 5.2 Categorias de denúncia e ODS
+
+Quadro: Categorias de denúncia e ODS associados a priori | Fonte: elaborado pelo autor, com base nas categorias do aplicativo.
 
 | Categoria no aplicativo | ODS / metas associadas |
 |---|---|
@@ -264,6 +276,8 @@ resolver a demanda; o aplicativo contribui com a **visibilidade e a rastreabilid
 
 Os indicadores abaixo usam apenas tabelas e colunas existentes (SQLite). Em produção deverão ser
 calculados sobre uma base central, já que o banco da versão 1.0 é local ao aparelho.
+
+Quadro: Consultas SQL dos indicadores propostos | Fonte: elaborado pelo autor, a partir do esquema do banco local (`Db`).
 
 ```sql
 -- Taxa de resolução por cidade (ODS 16.6)
@@ -378,7 +392,7 @@ erro. Trata-se de evidência, em escala de protótipo, da dependência de um ser
 - Mapa agregado para a prefeitura (denúncias por bairro e por categoria) e, se aprovado, mapa
   público e moderado de demandas; validação do ponto contra os limites do município; anexos de foto
   no servidor.
-- Avaliação de usabilidade com a *System Usability Scale* (Brooke, 1996) e entrevistas com gestores
+- Avaliação de usabilidade com a *System Usability Scale* (BROOKE, 1996) e entrevistas com gestores
   `[A COLETAR]`. Se houver participantes humanos, submeter a avaliação ao comitê de ética conforme a
   Resolução CNS nº 510/2016 `[VERIFICAR enquadramento]`.
 - Piloto em uma cidade, medindo os indicadores da Seção 5.3 ao longo do tempo.
@@ -412,10 +426,10 @@ MORIARTY, K.; KALISKI, B.; RUSCH, A. **PKCS #5: Password-Based Cryptography Spec
 
 ONU. Assembleia Geral. **Transformando nosso mundo: a Agenda 2030 para o Desenvolvimento Sustentável**. Resolução A/RES/70/1, 2015.
 
-PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. **Journal of Management Information Systems**, v. 24, n. 3, p. 45-77, 2007.
-
 OPENSTREETMAP FOUNDATION. **Tile Usage Policy** e licença dos dados (ODbL, "© OpenStreetMap contributors"). `[VERIFICAR: URLs e data de acesso]`
 
 OWASP. **Password Storage Cheat Sheet**. `[VERIFICAR: URL e data de acesso]`
+
+PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. **Journal of Management Information Systems**, v. 24, n. 3, p. 45-77, 2007.
 
 `[VERIFICAR]` Conferir paginação, grafia dos autores e dados de cada referência na fonte original antes de submeter.
