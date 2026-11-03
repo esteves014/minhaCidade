@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="brand_primary">#1A5FB4</color>
+    <color name="brand_on_primary">#FFFFFF</color>
+    <color name="brand_primary_container">#D6E3FF</color>
+    <color name="brand_on_primary_container">#001B3E</color>
+    <color name="brand_secondary_container">#DCE3F1</color>
+    <color name="brand_on_secondary_container">#151C27</color>
+
+    <color name="status_aberta">#B26A00</color>
+    <color name="status_em_analise">#1A5FB4</color>
+    <color name="status_resolvida">#2E7D32</color>
+</resources>

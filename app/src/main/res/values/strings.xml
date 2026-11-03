@@ -1,0 +1,160 @@
+<resources>
+    <string name="app_name">minhaCidade</string>
+
+    <string name="nav_vagas">Vagas</string>
+    <string name="nav_noticias">Notícias</string>
+    <string name="nav_denuncias">Denúncias</string>
+    <string name="nav_perfil">Perfil</string>
+
+    <!-- Títulos recebem o nome da cidade do cidadão -->
+    <string name="titulo_vagas">Vagas em %1$s</string>
+    <string name="titulo_noticias">Notícias de %1$s</string>
+    <string name="subtitulo_noticias">Conteúdo dos jornais parceiros da cidade</string>
+    <string name="titulo_denuncias">Denúncias em %1$s</string>
+    <string name="subtitulo_denuncias">Registre problemas como buracos, falta de iluminação e lixo acumulado</string>
+
+    <string name="filtro_todas">Todas</string>
+    <string name="filtro_todos">Todos</string>
+    <string name="busca_vagas_hint">Buscar cargo, empresa ou bairro</string>
+    <string name="vazio_vagas">Nenhuma vaga encontrada.</string>
+    <string name="vazio_noticias">Nenhuma notícia encontrada.</string>
+    <string name="vazio_denuncias">Você ainda não registrou denúncias.\nToque em + para criar a primeira.</string>
+
+    <string name="vaga_titulo_tela">Vaga</string>
+    <string name="vaga_descricao">Sobre a vaga</string>
+    <string name="btn_candidatar_email">Candidatar-se por e-mail</string>
+    <string name="btn_ligar">Ligar para a empresa</string>
+    <string name="email_vaga_assunto">Candidatura: %1$s</string>
+    <string name="email_vaga_corpo">Olá, tenho interesse na vaga de %1$s. Segue meu currículo em anexo.</string>
+
+    <string name="noticia_titulo_tela">Notícia</string>
+    <string name="btn_ler_site">Ler no site do jornal</string>
+    <string name="noticia_fonte">%1$s · %2$s</string>
+
+    <string name="denuncia_titulo_tela">Denúncia</string>
+    <string name="denuncia_nova_titulo">Nova denúncia</string>
+    <string name="denuncia_nova_fab">Nova denúncia</string>
+    <string name="denuncia_categoria_hint">Tipo de problema</string>
+    <string name="denuncia_endereco_hint">Rua, número e bairro</string>
+    <string name="denuncia_descricao_hint">Descreva o problema</string>
+    <string name="btn_adicionar_foto">Adicionar foto</string>
+    <string name="btn_trocar_foto">Trocar foto</string>
+    <string name="btn_enviar_denuncia">Registrar denúncia</string>
+    <string name="erro_categoria">Escolha o tipo de problema</string>
+    <string name="erro_endereco">Informe o endereço</string>
+    <string name="erro_descricao">Descreva o problema com pelo menos 10 caracteres</string>
+    <string name="erro_foto">Não foi possível carregar a foto</string>
+    <string name="denuncia_registrada">Denúncia registrada. Protocolo %1$s</string>
+    <string name="protocolo_rotulo">Protocolo %1$s</string>
+    <string name="btn_email_prefeitura">Enviar por e-mail à prefeitura</string>
+    <string name="btn_ligar_prefeitura">Ligar para a prefeitura</string>
+    <string name="email_denuncia_assunto">Denúncia %1$s - %2$s</string>
+    <string name="email_denuncia_corpo">Protocolo: %1$s\nTipo: %2$s\nLocal: %3$s\n\n%4$s\n\nCidadão: %5$s\nContato: %6$s</string>
+
+    <!-- Localização e mapa das denúncias -->
+    <string name="localizacao_titulo">Local no mapa (opcional)</string>
+    <string name="localizacao_nenhuma">Nenhuma posição marcada</string>
+    <string name="localizacao_marcada">Posição marcada: %1$.5f, %2$.5f</string>
+    <string name="localizacao_obtendo">Obtendo sua posição…</string>
+    <string name="btn_usar_localizacao">Usar minha localização</string>
+    <string name="btn_escolher_no_mapa">Escolher no mapa</string>
+    <string name="btn_remover_localizacao">Remover posição</string>
+    <string name="erro_localizacao_negada">Sem permissão de localização. Você ainda pode escolher o ponto no mapa.</string>
+    <string name="erro_localizacao_desligada">Ative a localização do aparelho ou escolha o ponto no mapa</string>
+    <string name="erro_localizacao_falhou">Não foi possível obter sua posição. Tente de novo ou escolha no mapa.</string>
+    <string name="mapa_titulo">Mapa das denúncias</string>
+    <string name="mapa_escolher_titulo">Escolher local</string>
+    <string name="mapa_vazio">Nenhuma das suas denúncias tem posição marcada.</string>
+    <string name="btn_confirmar_local">Confirmar este local</string>
+    <string name="btn_abrir_denuncia">Abrir denúncia</string>
+    <string name="btn_ver_no_mapa">Ver no mapa</string>
+    <string name="denuncia_mapa_fab">Mapa</string>
+
+    <string name="nenhum_app">Nenhum aplicativo disponível para esta ação</string>
+
+    <string name="status_aberta">Aberta</string>
+    <string name="status_em_analise">Em análise</string>
+    <string name="status_resolvida">Resolvida</string>
+
+    <!-- Pareceres e notificações -->
+    <string name="pareceres_titulo">Pareceres da prefeitura</string>
+    <string name="pareceres_vazio">Ainda sem parecer da prefeitura.</string>
+    <string name="badge_novo_parecer">Novo parecer</string>
+    <string name="notif_canal_nome">Pareceres das denúncias</string>
+    <string name="notif_canal_descricao">Avisos quando a prefeitura responde a uma denúncia sua</string>
+    <string name="notif_titulo">Prefeitura de %1$s respondeu sua denúncia</string>
+    <string name="notif_texto_grande">%1$s\n\n%2$s</string>
+    <string name="btn_simular_parecer">Simular parecer da prefeitura (teste)</string>
+    <string name="parecer_simulado_em_analise">Recebemos sua denúncia e encaminhamos para a equipe responsável. Em breve a equipe fará a vistoria no local.</string>
+    <string name="parecer_simulado_resolvida">A equipe concluiu o serviço no local informado. Se o problema persistir, registre uma nova denúncia.</string>
+
+    <!-- Login e cadastro -->
+    <string name="login_subtitulo">Entre com seu CPF e senha</string>
+    <string name="cpf_hint">CPF</string>
+    <string name="senha_hint">Senha</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_entrando">Entrando…</string>
+    <string name="sem_conta">Ainda não tem conta?</string>
+    <string name="btn_criar_conta">Criar conta</string>
+    <string name="login_falhou">CPF ou senha incorretos</string>
+    <string name="login_cidade_sem_contrato">O serviço não está mais disponível para a sua cidade</string>
+    <string name="erro_cpf_invalido">CPF inválido</string>
+    <string name="erro_senha_obrigatoria">Informe a senha</string>
+
+    <string name="cadastro_titulo">Criar conta</string>
+    <string name="nome_hint">Nome completo</string>
+    <string name="email_hint">E-mail</string>
+    <string name="cidade_hint">Cidade onde você mora</string>
+    <string name="cidade_ajuda">Só aparecem cidades que contrataram o serviço</string>
+    <string name="nenhuma_cidade">Nenhuma cidade disponível ainda. Volte em breve.</string>
+    <string name="senha_nova_hint">Senha (mínimo 8 caracteres)</string>
+    <string name="senha_confirmar_hint">Repita a senha</string>
+    <string name="btn_cadastrar">Criar conta</string>
+    <string name="btn_cadastrando">Criando conta…</string>
+    <string name="erro_nome">Informe seu nome completo</string>
+    <string name="erro_email">E-mail inválido</string>
+    <string name="erro_cidade">Escolha sua cidade na lista</string>
+    <string name="erro_senha_curta">A senha deve ter pelo menos 8 caracteres</string>
+    <string name="erro_senhas_diferentes">As senhas não coincidem</string>
+    <string name="erro_cpf_ja_cadastrado">Este CPF já tem cadastro. Use Entrar.</string>
+    <string name="erro_cidade_indisponivel">Esta cidade não tem o serviço contratado</string>
+
+    <!-- Perfil -->
+    <string name="perfil_titulo">Meu perfil</string>
+    <string name="perfil_cpf">CPF %1$s</string>
+    <string name="perfil_telefone_vazio">Telefone não informado</string>
+    <string name="perfil_prefeitura">Prefeitura de %1$s</string>
+    <string name="btn_editar_perfil">Editar perfil</string>
+    <string name="btn_sair">Sair da conta</string>
+    <string name="editar_perfil_titulo">Editar perfil</string>
+    <string name="telefone_hint">Telefone (opcional)</string>
+    <string name="perfil_endereco_hint">Meu endereço (rua, número e bairro)</string>
+    <string name="perfil_endereco_ajuda">Opcional. Ajuda a preencher o local das suas denúncias.</string>
+    <string name="perfil_endereco_vazio">Endereço não informado</string>
+    <string name="btn_localizacao_atual">Usar minha localização atual</string>
+    <string name="btn_localizando">Obtendo localização…</string>
+    <string name="btn_meu_endereco">Usar meu endereço cadastrado</string>
+    <string name="erro_endereco_localizacao_negada">Sem permissão de localização. Digite o endereço.</string>
+    <string name="erro_endereco_localizacao_desligada">Ative a localização do aparelho ou digite o endereço.</string>
+    <string name="erro_endereco_localizacao_falhou">Não foi possível obter sua localização. Tente de novo ou digite o endereço.</string>
+    <string name="cpf_fixo_ajuda">O CPF é o seu acesso e não pode ser alterado</string>
+    <string name="alterar_senha_titulo">Alterar senha</string>
+    <string name="alterar_senha_ajuda">Deixe em branco para manter a senha atual</string>
+    <string name="senha_atual_hint">Senha atual</string>
+    <string name="erro_senha_atual">Senha atual incorreta</string>
+    <string name="erro_senha_atual_obrigatoria">Informe a senha atual para trocá-la</string>
+    <string name="btn_salvar">Salvar alterações</string>
+    <string name="btn_salvando">Salvando…</string>
+    <string name="dados_atualizados">Dados atualizados</string>
+
+    <string-array name="categorias_denuncia">
+        <item>Buraco na rua</item>
+        <item>Iluminação pública</item>
+        <item>Lixo ou entulho</item>
+        <item>Esgoto ou vazamento</item>
+        <item>Calçada danificada</item>
+        <item>Semáforo ou sinalização</item>
+        <item>Árvore ou poda</item>
+        <item>Outros</item>
+    </string-array>
+</resources>
