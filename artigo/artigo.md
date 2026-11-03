@@ -1,6 +1,6 @@
 ---
-versao_artigo: 0.2
-data: 2026-11-02
+versao_artigo: 0.3
+data: 2026-11-03
 versao_app: 1.0 (versionCode 1; esquema do banco v4)
 status: rascunho em evolução — atualizado junto com o código
 ---
@@ -159,7 +159,7 @@ mecanismo nem medição.
 | RF11 | Informar, de forma opcional, a posição da denúncia: pela localização do aparelho (só após o cidadão tocar no botão e conceder a permissão) ou escolhendo um ponto no mapa; a posição pode ser removida antes do envio | Denúncias |
 | RF12 | Ver no mapa as próprias denúncias que têm posição, abrir o cartão de uma denúncia e ir ao seu detalhe; no detalhe, "Ver no mapa" centraliza a denúncia | Denúncias |
 | RF13 | Guardar no perfil um endereço residencial opcional (com coordenadas), digitado ou obtido pelo botão "Usar minha localização atual"; o endereço serve de atalho ("Usar meu endereço cadastrado") para preencher o local de uma nova denúncia | Conta / Denúncias |
-| RF14 | Traduzir a posição obtida em endereço legível ("Rua, número - Bairro") pelo serviço de geocodificação do aparelho; se falhar, usar as coordenadas como texto, e preencher o campo de endereço da denúncia apenas quando estiver vazio | Conta / Denúncias |
+| RF14 | Traduzir a posição obtida em endereço legível ("Rua, número - Bairro") pelo serviço de geocodificação do aparelho; se falhar, usar as coordenadas como texto. Na nova denúncia, "Usar minha localização" **substitui** o endereço pelo do local atual do cidadão; um ponto escolhido no mapa só preenche o campo se ele estiver vazio ou ainda contiver um endereço preenchido pelo app (texto digitado pela pessoa não é sobrescrito) | Conta / Denúncias |
 
 ### 4.2 Arquitetura
 
@@ -176,7 +176,9 @@ aparelho é obtida pelo `LocationManager` do Android (sem serviços do Google), 
 cidadão toca em "Usar minha localização". A escolha manual funciona movendo o mapa sob um alfinete
 central e confirmando. A conversão de coordenadas em endereço usa a classe `Geocoder` do Android
 (`EnderecoTexto`), executada fora da thread principal; ela depende de um serviço de geocodificação
-do aparelho e de rede, e o aplicativo tem alternativa quando não há resposta (exibir as coordenadas).
+do aparelho e de rede, e o aplicativo tem alternativa quando não há resposta (usar as coordenadas
+como texto do endereço e avisar o cidadão para corrigi-lo). Buscas de endereço concorrentes (nova
+posição, endereço cadastrado ou remoção da posição) tornam obsoleta a busca anterior.
 
 ### 4.3 Modelo de dados
 
@@ -326,7 +328,10 @@ O fluxo do mapa foi verificado manualmente em um emulador Android (Pixel, API 34
 mapa pela lista de denúncias, cartão ao tocar no alfinete, navegação ao detalhe, escolha de um ponto
 no mapa, preenchimento automático do endereço, registro de uma nova denúncia com posição e sua
 exibição no mapa junto à denúncia anterior (com enquadramento automático dos dois pontos). O
-caminho do GPS real (botão "Usar minha localização") **não** foi exercitado neste teste.
+caminho do GPS real (botão "Usar minha localização") **não** foi exercitado neste teste. A mudança
+de 2026-11-03 (o botão passa a substituir o endereço pelo do local atual) foi verificada apenas por
+compilação e pelos testes unitários existentes; **não** foi testada em dispositivo ou emulador
+`[A COLETAR]`.
 Na primeira execução o servidor público de *tiles* do OpenStreetMap respondeu HTTP 403 ("App is not
 following the tile usage policy"), pois o aplicativo se identificava apenas pelo `applicationId`;
 após passar a enviar um *User-Agent* que identifica o aplicativo (e limpar o cache local de *tiles*)

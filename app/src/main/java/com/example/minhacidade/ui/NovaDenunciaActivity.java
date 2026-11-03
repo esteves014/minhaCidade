@@ -63,6 +63,12 @@ public class NovaDenunciaActivity extends AppCompatActivity {
     private Button btnRemoverLocal;
     private CancellationSignal buscandoPosicao;
 
+    // O endereço foi escrito pelo app (GPS, mapa ou cadastro) e ainda não foi mexido pela pessoa:
+    // nesse caso uma nova posição pode substituí-lo; texto digitado nunca é sobrescrito pelo mapa.
+    private boolean enderecoAutomatico;
+    private boolean preenchendoEndereco;
+    private int buscaEndereco;
+
     private final androidx.activity.result.ActivityResultLauncher<PickVisualMediaRequest> seletorFoto =
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), this::aoEscolherFoto);
 
@@ -82,7 +88,7 @@ public class NovaDenunciaActivity extends AppCompatActivity {
                 if (resultado.getResultCode() == RESULT_OK && dados != null
                         && dados.hasExtra(MapaActivity.EXTRA_LAT) && dados.hasExtra(MapaActivity.EXTRA_LNG)) {
                     definirPosicao(dados.getDoubleExtra(MapaActivity.EXTRA_LAT, 0),
-                            dados.getDoubleExtra(MapaActivity.EXTRA_LNG, 0));
+                            dados.getDoubleExtra(MapaActivity.EXTRA_LNG, 0), false);
                 }
             });
 
@@ -113,7 +119,12 @@ public class NovaDenunciaActivity extends AppCompatActivity {
                 getResources().getStringArray(R.array.categorias_denuncia)));
 
         Ui.aoDigitar(categoria, () -> categoriaLayout.setError(null));
-        Ui.aoDigitar(endereco, () -> enderecoLayout.setError(null));
+        Ui.aoDigitar(endereco, () -> {
+            enderecoLayout.setError(null);
+            if (!preenchendoEndereco) {
+                enderecoAutomatico = false;
+            }
+        });
         Ui.aoDigitar(descricao, () -> descricaoLayout.setError(null));
 
         btnFoto.setOnClickListener(v -> seletorFoto.launch(new PickVisualMediaRequest.Builder()
@@ -133,6 +144,8 @@ public class NovaDenunciaActivity extends AppCompatActivity {
         btnRemoverLocal.setOnClickListener(v -> {
             latitude = null;
             longitude = null;
+            buscaEndereco++;
+            enderecoLayout.setHelperText(null);
             atualizarStatusPosicao();
         });
         // Atalho: o local da denúncia costuma ser perto de casa; o cidadão ainda pode editar o texto.
@@ -140,9 +153,12 @@ public class NovaDenunciaActivity extends AppCompatActivity {
         if (usuario.temEndereco()) {
             btnMeuEndereco.setVisibility(android.view.View.VISIBLE);
             btnMeuEndereco.setOnClickListener(v -> {
-                endereco.setText(usuario.endereco);
+                buscaEndereco++;
+                escreverEndereco(usuario.endereco);
                 if (usuario.latitude != null && usuario.longitude != null) {
-                    definirPosicao(usuario.latitude, usuario.longitude);
+                    latitude = usuario.latitude;
+                    longitude = usuario.longitude;
+                    atualizarStatusPosicao();
                 }
             });
         }
@@ -204,31 +220,60 @@ public class NovaDenunciaActivity extends AppCompatActivity {
                         Toast.makeText(this, R.string.erro_localizacao_falhou, Toast.LENGTH_LONG).show();
                         atualizarStatusPosicao();
                     } else {
-                        definirPosicao(local.getLatitude(), local.getLongitude());
+                        definirPosicao(local.getLatitude(), local.getLongitude(), true);
                     }
                 });
     }
 
-    private void definirPosicao(double lat, double lng) {
+    /**
+     * Marca a posição e descobre o endereço dela. Com {@code sobrescrever} (toque em "Usar minha
+     * localização") o endereço é sempre trocado pelo do local atual; sem ele (ponto do mapa), só
+     * se o campo estiver vazio ou ainda for um endereço preenchido pelo app.
+     */
+    private void definirPosicao(double lat, double lng, boolean sobrescrever) {
         latitude = lat;
         longitude = lng;
         atualizarStatusPosicao();
-        preencherEnderecoDaPosicao(lat, lng);
+        if (sobrescrever || Ui.texto(endereco).isEmpty() || enderecoAutomatico) {
+            preencherEnderecoDaPosicao(lat, lng, sobrescrever);
+        }
     }
 
-    /** Se o cidadão ainda não digitou o endereço, descobre o da posição marcada (GPS ou mapa). */
-    private void preencherEnderecoDaPosicao(double lat, double lng) {
-        if (!Ui.texto(endereco).isEmpty()) {
-            return;
-        }
+    /**
+     * Converte a posição em "Rua, número - Bairro" (geocoder do aparelho, fora da thread principal).
+     * Se o geocoder falhar, usa as coordenadas como texto para o campo obrigatório não ficar vazio.
+     */
+    private void preencherEnderecoDaPosicao(double lat, double lng, boolean sobrescrever) {
+        int busca = ++buscaEndereco;
+        enderecoLayout.setHelperText(getString(R.string.endereco_buscando));
         executor.execute(() -> {
             String texto = EnderecoTexto.resolver(this, lat, lng);
             runOnUiThread(() -> {
-                if (texto != null && !isDestroyed() && Ui.texto(endereco).isEmpty()) {
-                    endereco.setText(texto);
+                // Uma busca mais nova (outra posição ou endereço cadastrado) torna esta obsoleta.
+                if (isDestroyed() || busca != buscaEndereco) {
+                    return;
+                }
+                enderecoLayout.setHelperText(null);
+                // A pessoa começou a digitar enquanto buscávamos: o texto dela vale mais que o do mapa.
+                if (!sobrescrever && !Ui.texto(endereco).isEmpty() && !enderecoAutomatico) {
+                    return;
+                }
+                if (texto == null) {
+                    escreverEndereco(EnderecoTexto.coordenadas(lat, lng));
+                    Toast.makeText(this, R.string.erro_endereco_nao_encontrado, Toast.LENGTH_LONG).show();
+                } else {
+                    escreverEndereco(texto);
                 }
             });
         });
+    }
+
+    private void escreverEndereco(String texto) {
+        preenchendoEndereco = true;
+        endereco.setText(texto);
+        preenchendoEndereco = false;
+        enderecoAutomatico = true;
+        enderecoLayout.setHelperText(null);
     }
 
     private void atualizarStatusPosicao() {

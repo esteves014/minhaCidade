@@ -52,7 +52,9 @@
     <string name="email_denuncia_corpo">Protocolo: %1$s\nTipo: %2$s\nLocal: %3$s\n\n%4$s\n\nCidadão: %5$s\nContato: %6$s</string>
 
     <!-- Localização e mapa das denúncias -->
-    <string name="localizacao_titulo">Local no mapa (opcional)</string>
+    <string name="localizacao_titulo">Localização da ocorrência (opcional)</string>
+    <string name="endereco_buscando">Buscando o endereço da sua posição…</string>
+    <string name="erro_endereco_nao_encontrado">Não foi possível descobrir o endereço desse ponto. Usamos as coordenadas; corrija o endereço se puder.</string>
     <string name="localizacao_nenhuma">Nenhuma posição marcada</string>
     <string name="localizacao_marcada">Posição marcada: %1$.5f, %2$.5f</string>
     <string name="localizacao_obtendo">Obtendo sua posição…</string>
