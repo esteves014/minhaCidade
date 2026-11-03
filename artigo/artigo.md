@@ -1,5 +1,5 @@
 ---
-versao_artigo: 0.4
+versao_artigo: 0.5
 data: 2026-11-03
 versao_app: 1.0 (versionCode 1; esquema do banco v4)
 status: rascunho em evolução — atualizado junto com o código
@@ -69,8 +69,11 @@ pessoalmente, sem protocolo nem retorno rastreável.
 
 O *minhaCidade* propõe reunir esses três serviços em um aplicativo único. A premissa de negócio é
 que **a prefeitura contrata o serviço** e o cidadão só consegue se cadastrar em cidades contratantes;
-todo o conteúdo exibido é filtrado pelo município do usuário. [A COMPLETAR: contexto real da
-iniciativa — se há parceria com prefeitura, empresa ou instituição de ensino.]
+todo o conteúdo exibido é filtrado pelo município do usuário. Essa premissa é uma hipótese de
+projeto, não uma parceria existente: o *minhaCidade* foi desenvolvido como trabalho acadêmico, cujo
+objetivo era produzir uma solução voltada aos ODS, com apoio da instituição de ensino e sem municípios
+parceiros, prefeituras contratantes ou jornais conveniados. As cidades "contratantes" do protótipo
+(Lins, Promissão e Guaiçara) e todo o conteúdo são fictícios.
 
 **Objetivo geral.** Projetar, implementar e analisar um aplicativo móvel municipal de vagas,
 notícias e denúncias, explicitando sua contribuição aos ODS.
@@ -97,8 +100,24 @@ A Resolução A/RES/70/1 da Assembleia Geral da ONU (ONU, 2015) adota a Agenda 2
 ("Cidades e comunidades sustentáveis") e o ODS 16 ("Paz, justiça e instituições eficazes") tratam
 diretamente da gestão urbana e das instituições; o ODS 8 ("Trabalho decente e crescimento
 econômico") e o ODS 9 ("Indústria, inovação e infraestrutura") relacionam-se à inserção produtiva e
-ao acesso a tecnologias de informação e comunicação. [A COMPLETAR: referência a estudos sobre
-"localização dos ODS" em municípios brasileiros.]
+ao acesso a tecnologias de informação e comunicação.
+
+A adaptação das metas globais ao nível subnacional é tratada na literatura como "localização" dos
+ODS. O roteiro publicado em 2016 pela Global Taskforce of Local and Regional Governments, com o PNUD
+e o ONU-Habitat, a organiza em conscientização, defesa de uma perspectiva subnacional nas estratégias
+nacionais, implementação e monitoramento com dados locais (GLOBAL TASKFORCE; PNUD; ONU-HABITAT, 2016)
+`[VERIFICAR: conferir no documento original]`. No Brasil, Eberhardt e Mantovaneli Junior (2024)
+analisam o projeto "Localizando os ODS no Brasil", parceria iniciada em 2016 entre a Confederação
+Nacional de Municípios e o PNUD para apoiar municípios na adaptação dos ODS ao nível local, e discutem
+o papel da governança territorial. Muchagata et al. (2023) aplicaram um questionário a prefeituras,
+sobretudo de municípios mais populosos e de alta vulnerabilidade socioeconômica, e obtiveram 38
+respostas válidas sobre capacidade instalada, ações, barreiras e facilitadores para incorporar a
+Agenda 2030. Akerman et al. (2024), em revisão narrativa, examinam os planos que cinco municípios
+(Barcarena, Barueri, Francisco Morato, Santana de Parnaíba e São Paulo) relataram à ONU entre 2017 e
+2023. Esses trabalhos tratam do planejamento e da governança municipais da Agenda 2030; a relação
+entre a localização dos ODS e aplicativos de serviços ao cidadão, como o proposto aqui, não foi
+encontrada nessa busca. `[VERIFICAR: os três artigos foram conhecidos por páginas das revistas e
+resumos; ler os textos completos antes de submeter]`
 
 ### 2.2 Governo digital, transparência e participação
 
@@ -111,10 +130,48 @@ dados pessoais, como o CPF, a finalidade e necessidade legítimas.
 
 ### 2.3 Trabalhos relacionados
 
-[A COMPLETAR: revisão de literatura / mapeamento de aplicativos de zeladoria urbana e de
-participação cidadã (candidatos a investigar e citar apenas após leitura: FixMyStreet, Colab.re,
-canais "156" municipais), de portais de emprego locais e de agregadores de notícias locais.
-Definir critérios de inclusão, bases consultadas e período. Não preencher sem a busca real.]
+**Método e limites da busca.** Em 2026-11-03 fez-se uma busca exploratória, **não sistemática**, em
+buscador web de uso geral, com consultas pelo nome de cada solução e pelo tema (zeladoria urbana e
+participação cidadã, canais 156, vagas de emprego, notícias locais). Incluíram-se soluções brasileiras
+ou de referência internacional, usadas por governos locais ou pela população, com página oficial ou
+estudo acadêmico acessível; páginas de fabricantes e de prefeituras foram tratadas como
+autodeclaração, e números de adoção ou de resolução de demandas não foram tomados como evidência de
+eficácia. Não houve consulta a bases acadêmicas (Scopus, Web of Science, SciELO, Google Scholar),
+nem período de corte, nem leitura integral de todos os textos. Por isso, nada abaixo prova a
+ausência de outras soluções. `[A COLETAR: busca sistemática, com bases, strings de busca, período e
+critérios de inclusão e exclusão registrados]`
+
+**Zeladoria urbana e participação cidadã.** O FixMyStreet, do mySociety, é um serviço em que o
+cidadão marca o problema em um mapa, o relato é enviado à autoridade responsável e publicado
+na internet; o software é livre e há mais de 20 sites em diferentes países (MYSOCIETY, 2026). O Colab
+reúne em um aplicativo o relato de problemas urbanos com foto, o apoio de outros usuários, consultas
+públicas e serviços da prefeitura (COLAB, 2026). Carvalho (2018) estudou o Colab.re como dispositivo
+de participação social na gestão de Paragominas (PA), e Rosa e Santos ([s.d.]) `[VERIFICAR: ano e
+evento]` o citam, ao lado do e-Ouve, ao tomar como caso o sistema Reclama Muz, de Muzambinho (MG).
+Os números que o fabricante exibe (mais de 1 milhão de cidadãos cadastrados e mais de 80% das demandas
+publicadas resolvidas) são autodeclarados e não foram verificados. Entre os canais 156
+municipais, o aplicativo 156+POA, de Porto Alegre, lançado em maio de 2021, reunia 93 serviços e
+recursos em 2023 e abre solicitações de água e esgoto, iluminação pública, limpeza urbana e praças,
+entre outras (PORTO ALEGRE, 2023); os 29 509 protocolos de janeiro a maio de 2023 são dado da
+própria prefeitura.
+
+**Vagas de emprego.** Em 2017 o Ministério do Trabalho lançou o aplicativo Sine Fácil, desenvolvido
+pela Dataprev, que parece ter sido substituído pela consulta a vagas do Sine na Carteira de Trabalho
+Digital `[VERIFICAR: informação obtida em notícias; confirmar em fonte oficial do gov.br]`. Não se
+buscaram portais privados de emprego nem solução por município.
+
+**Notícias locais.** O Atlas da Notícia, do Projor, mapeia os municípios sem veículos jornalísticos
+(os "desertos de notícias") e é a referência encontrada para a oferta de notícia local no país
+(PROJOR, [s.d.]) `[VERIFICAR: edição, URL e data de acesso]`. Não se buscaram agregadores
+de notícias locais com a mesma profundidade.
+
+**Posição do minhaCidade.** Nas soluções consultadas, os módulos aparecem separados (relato de
+problemas urbanos, serviços da prefeitura, vagas do Sine, notícias), e o Colab e os canais 156
+já reúnem serviços municipais em um só aplicativo. O que o minhaCidade explora é a combinação, em
+um único acesso segmentado por município contratante, de vagas, notícias locais e denúncias com protocolo
+e parecer, com a leitura explícita de cada função em relação aos ODS (Seção 5). Na busca realizada não
+se encontrou solução com esses três módulos juntos, o que, dado o método acima, não é evidência de
+ausência. Não se comparou desempenho, usabilidade nem resultados entre as soluções.
 
 ## 3 Metodologia
 
@@ -357,8 +414,9 @@ erro. Trata-se de evidência, em escala de protótipo, da dependência de um ser
 
 ## 7 Discussão e limitações
 
-1. **Dados fictícios e sem servidor.** Sem back-end, não há integração real com prefeituras nem
-   com jornais; os indicadores da Seção 5.3 ainda não podem ser medidos.
+1. **Dados fictícios, sem servidor e sem parceiros.** Nenhum município ou jornal é parceiro do
+   projeto, que conta apenas com o apoio da instituição de ensino; sem back-end, não há integração
+   real com prefeituras nem com jornais; os indicadores da Seção 5.3 ainda não podem ser medidos.
 2. **Armazenamento do CPF.** O CPF é gravado em texto claro na coluna `cpf` do banco local. Para
    produção, avaliar minimização, criptografia em repouso e base legal conforme a LGPD.
 3. **Parâmetros de hash.** As 100 000 iterações de PBKDF2-HMAC-SHA256 estão abaixo da recomendação
@@ -405,10 +463,12 @@ O *minhaCidade* organiza em um só aplicativo três serviços locais e, por sua 
 status, pareceres e segmentação por município), oferece um mecanismo concreto de transparência e
 responsividade (ODS 16) e um canal de sinalização de problemas urbanos (ODS 11), com relações mais
 indiretas com os ODS 3, 6, 8, 9, 10 e 17. A contribuição efetiva depende de adoção pela população e de resposta da
-prefeitura, o que só pode ser afirmado após o piloto. Esta é uma versão parcial: as seções 2.3, 6 e
-8 serão completadas conforme o projeto avançar.
+prefeitura, o que só pode ser afirmado após o piloto. Esta é uma versão parcial: a busca sistemática da Seção 2.3 e as
+seções 6 e 8 serão completadas conforme o projeto avançar.
 
 ## Referências
+
+AKERMAN, M.; MENDES, R.; OLIVEIRA, G. M. de; ALMEIDA, P. S. de; FRUTUOSO, M. F.; VIANA, C.; MORIYA, R. Y.; WALLERSTEIN, N. Municipal localization of the Sustainable Development Goals (SDGs) as a device to the continuous activation of the 2030 Agenda: a narrative review. **ABCS Health Sciences**, v. 49, e024307, 2024. DOI: 10.7322/abcshs.2023047.2307. `[VERIFICAR]`
 
 BRASIL. **Lei nº 12.527**, de 18 de novembro de 2011. Regula o acesso a informações (Lei de Acesso à Informação).
 
@@ -420,9 +480,21 @@ BRASIL. **Lei nº 14.129**, de 29 de março de 2021. Princípios, regras e instr
 
 BROOKE, J. SUS: a "quick and dirty" usability scale. In: JORDAN, P. W. et al. (org.). **Usability Evaluation in Industry**. London: Taylor & Francis, 1996. p. 189-194.
 
+CARVALHO, T. L. M. **Computação urbana**: o uso do aplicativo móvel Colab.re como dispositivo de participação social na gestão da cidade de Paragominas-PA. 2018. 122 f. Dissertação (Mestrado em Gestão de Recursos Naturais e Desenvolvimento Local na Amazônia) – Núcleo do Meio Ambiente, Universidade Federal do Pará, Belém, 2018.
+
+COLAB. **Todos os serviços da prefeitura em um só lugar**. Disponível em: https://www.colab.com.br/sou-cidadao. Acesso em: 3 nov. 2026.
+
+EBERHARDT, F. L. M.; MANTOVANELI JUNIOR, O. A implementação dos Objetivos de Desenvolvimento Sustentável (ODS) nos municípios brasileiros: uma análise do projeto Localizando os Objetivos de Desenvolvimento Sustentável (ODS) no Brasil. **Desenvolvimento em Questão**, v. 22, n. 60, e15137, 2024. DOI: 10.21527/2237-6453.2024.60.15137.
+
+GLOBAL TASKFORCE OF LOCAL AND REGIONAL GOVERNMENTS; PNUD; ONU-HABITAT. **Roadmap for localizing the SDGs**: implementation and monitoring at subnational level. 2016. `[VERIFICAR: URL, paginação e data de acesso]`
+
 HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. **MIS Quarterly**, v. 28, n. 1, p. 75-105, 2004.
 
 MORIARTY, K.; KALISKI, B.; RUSCH, A. **PKCS #5: Password-Based Cryptography Specification Version 2.1**. RFC 8018. IETF, 2017.
+
+MUCHAGATA, M.; MIRANDA, W. D. de; FERNANDES, L. da M. M.; SANTOS, F. P. dos. Localizando objetivos do desenvolvimento sustentável: desafios de municípios brasileiros mais populosos e com alta vulnerabilidade socioeconômica para a implementação da agenda 2030. **Revista do Serviço Público**, v. 74, n. 4, p. 734-757, 2023. `[VERIFICAR: DOI e grafia dos nomes]`
+
+MYSOCIETY. **FixMyStreet**. Disponível em: https://www.mysociety.org/community/fixmystreet/. Acesso em: 3 nov. 2026.
 
 ONU. Assembleia Geral. **Transformando nosso mundo: a Agenda 2030 para o Desenvolvimento Sustentável**. Resolução A/RES/70/1, 2015.
 
@@ -431,5 +503,11 @@ OPENSTREETMAP FOUNDATION. **Tile Usage Policy** e licença dos dados (ODbL, "© 
 OWASP. **Password Storage Cheat Sheet**. `[VERIFICAR: URL e data de acesso]`
 
 PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. **Journal of Management Information Systems**, v. 24, n. 3, p. 45-77, 2007.
+
+PORTO ALEGRE. Prefeitura Municipal. **Aplicativo 156+POA amplia funcionalidades e já reúne 93 serviços e recursos**. 7 jun. 2023. Disponível em: https://prefeitura.poa.br/smtc/noticias/aplicativo-156poa-amplia-funcionalidades-e-ja-reune-93-servicos-e-recursos. Acesso em: 3 nov. 2026.
+
+PROJOR. **Atlas da Notícia**. `[VERIFICAR: edição, URL e data de acesso]`
+
+ROSA, A. C. P.; SANTOS, P. C. **Engenharia de software aplicada à participação cidadã digital**: uma revisão bibliográfica sobre sistemas colaborativos urbanos. Muzambinho: IFSULDEMINAS, [s.d.]. `[VERIFICAR: evento, ano e URL]`
 
 `[VERIFICAR]` Conferir paginação, grafia dos autores e dados de cada referência na fonte original antes de submeter.
