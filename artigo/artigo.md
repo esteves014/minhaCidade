@@ -158,7 +158,8 @@ mecanismo nem medição.
 | RF10 | Encaminhar a denúncia à prefeitura por e-mail ou telefone | Denúncias |
 | RF11 | Informar, de forma opcional, a posição da denúncia: pela localização do aparelho (só após o cidadão tocar no botão e conceder a permissão) ou escolhendo um ponto no mapa; a posição pode ser removida antes do envio | Denúncias |
 | RF12 | Ver no mapa as próprias denúncias que têm posição, abrir o cartão de uma denúncia e ir ao seu detalhe; no detalhe, "Ver no mapa" centraliza a denúncia | Denúncias |
-| RF13 | Guardar no perfil um endereço residencial opcional (com coordenadas) que serve de atalho para preencher o local de uma nova denúncia | Conta / Denúncias |
+| RF13 | Guardar no perfil um endereço residencial opcional (com coordenadas), digitado ou obtido pelo botão "Usar minha localização atual"; o endereço serve de atalho ("Usar meu endereço cadastrado") para preencher o local de uma nova denúncia | Conta / Denúncias |
+| RF14 | Traduzir a posição obtida em endereço legível ("Rua, número - Bairro") pelo serviço de geocodificação do aparelho; se falhar, usar as coordenadas como texto, e preencher o campo de endereço da denúncia apenas quando estiver vazio | Conta / Denúncias |
 
 ### 4.2 Arquitetura
 
@@ -173,7 +174,9 @@ o que dispensa chave de API e conta de cobrança, mas exige conexão para baixar
 exibição da atribuição "© OpenStreetMap contributors" sobre o mapa (implementada). A posição do
 aparelho é obtida pelo `LocationManager` do Android (sem serviços do Google), uma única vez, quando o
 cidadão toca em "Usar minha localização". A escolha manual funciona movendo o mapa sob um alfinete
-central e confirmando.
+central e confirmando. A conversão de coordenadas em endereço usa a classe `Geocoder` do Android
+(`EnderecoTexto`), executada fora da thread principal; ela depende de um serviço de geocodificação
+do aparelho e de rede, e o aplicativo tem alternativa quando não há resposta (exibir as coordenadas).
 
 ### 4.3 Modelo de dados
 
@@ -313,12 +316,23 @@ Com os dados fictícios, 1 das 3 denúncias está resolvida, as 3 têm posição
 
 ## 6 Resultados parciais
 
-Na versão 1.0, o protótipo implementa os requisitos RF1 a RF13 (Seção 4.1) com dados fictícios,
+Na versão 1.0, o protótipo implementa os requisitos RF1 a RF14 (Seção 4.1) com dados fictícios,
 persistência local e simulação do parecer da prefeitura. Em 2026-11-02, a compilação de depuração
-(`assembleDebug`) e a tarefa `testDebugUnitTest` foram concluídas com sucesso; os únicos testes
-existentes são os de exemplo do *template* do projeto, portanto **não há cobertura automatizada das
-funcionalidades**. [A COMPLETAR: registrar capturas de tela do mapa e do fluxo de denúncia em
-dispositivo/emulador e, quando existirem, os resultados de testes automatizados.]
+(`assembleDebug`) foi concluída e a tarefa `testDebugUnitTest` executou 13 testes unitários sem
+falhas nem erros. Esses testes cobrem a validação de CPF, a consistência dos dados iniciais e a
+formatação de endereços (e um teste de exemplo do *template*); **não há testes de interface nem de
+integração**, e as telas, o mapa e a captura de localização ainda não têm verificação automatizada.
+O fluxo do mapa foi verificado manualmente em um emulador Android (Pixel, API 34): abertura do
+mapa pela lista de denúncias, cartão ao tocar no alfinete, navegação ao detalhe, escolha de um ponto
+no mapa, preenchimento automático do endereço, registro de uma nova denúncia com posição e sua
+exibição no mapa junto à denúncia anterior (com enquadramento automático dos dois pontos). O
+caminho do GPS real (botão "Usar minha localização") **não** foi exercitado neste teste.
+Na primeira execução o servidor público de *tiles* do OpenStreetMap respondeu HTTP 403 ("App is not
+following the tile usage policy"), pois o aplicativo se identificava apenas pelo `applicationId`;
+após passar a enviar um *User-Agent* que identifica o aplicativo (e limpar o cache local de *tiles*)
+os mapas passaram a carregar. Não se isolou se a causa foi o *User-Agent* ou o cache de respostas de
+erro. Trata-se de evidência, em escala de protótipo, da dependência de um serviço de terceiros.
+[A COMPLETAR: capturas de tela para a versão final do artigo.]
 
 **Avaliação com usuários:** não realizada. `[A COLETAR]`
 
@@ -340,9 +354,13 @@ dispositivo/emulador e, quando existirem, os resultados de testes automatizados.
    finalidade, necessidade e base legal na LGPD `[VERIFICAR enquadramento]`; a coleta é opcional e
    iniciada pelo cidadão, mas a política de retenção e o compartilhamento com a prefeitura ainda
    não estão definidos.
+   O uso do `Geocoder` envia as coordenadas a um serviço de geocodificação do sistema
+   `[VERIFICAR qual provedor, conforme o aparelho]`, o que é mais um destino do dado de
+   localização a descrever em uma política de privacidade.
 8. **Mapa de terceiros.** Os *tiles* vêm dos servidores públicos do OpenStreetMap, o que expõe o
    endereço IP do aparelho a esse serviço e está sujeito à política de uso de *tiles* da
-   fundação `[VERIFICAR]`. Para produção, é preciso um provedor contratado ou próprio, e não há
+   fundação `[VERIFICAR]`; na prática, o protótipo já foi bloqueado uma vez pelo servidor (Seção 6).
+   Para produção, é preciso um provedor contratado ou próprio, e não há
    funcionamento do mapa sem rede (exceto *tiles* já em cache).
 9. **Precisão e conferência.** A precisão depende de o cidadão conceder localização precisa ou
    aproximada; não há verificação de que o ponto está dentro do município.

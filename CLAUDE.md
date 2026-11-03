@@ -12,3 +12,5 @@ Sempre que alterar o app (funcionalidade, modelo de dados, segurança, textos de
 3. Não invente dados, estatísticas, resultados de testes ou referências. Marque lacunas com `[A COMPLETAR]`, `[VERIFICAR]` ou `[A COLETAR]`.
 4. Só reivindique contribuição a um ODS quando houver mecanismo no código e indicador possível; classifique como direta, indireta ou potencial (Seção 3.2) e registre o que não é reivindicado (5.4).
 5. Os dados do seed são fictícios; não trate como resultado empírico.
+6. Outras sessões podem mexer no código em paralelo: antes de editar o artigo, releia `artigo/diario.md` (há linhas escritas por elas) e confira no código o que foi feito.
+7. Depois de atualizar o `.md`, regenere o Word (formato aproximado da SBC, não o modelo oficial): em `artigo/`, `npm install --no-save docx@9` (uma vez) e `node gerar-docx.js artigo.md artigo-sbc.docx`.
