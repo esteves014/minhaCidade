@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">minhaCidade</string>
+    <string name="logo_descricao">Logo do minhaCidade</string>
 
     <string name="nav_vagas">Vagas</string>
     <string name="nav_noticias">Notícias</string>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="432" height="432">
+<defs>
+<clipPath id="c"><circle cx="54" cy="54" r="54"/></clipPath>
+<linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="30" y1="0" x2="78" y2="108"><stop offset="0" stop-color="#3A8CE8"/><stop offset=".55" stop-color="#1A5FB4"/><stop offset="1" stop-color="#0C3573"/></linearGradient>
+<linearGradient id="pin" gradientUnits="userSpaceOnUse" x1="54" y1="22" x2="54" y2="88"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#D9E6F7"/></linearGradient>
+</defs>
+<g clip-path="url(#c)">
+<rect width="108" height="108" fill="url(#bg)"/>
+<circle cx="54" cy="46" r="34" fill="none" stroke="#fff" stroke-opacity=".15" stroke-width="1.2"/>
+<circle cx="54" cy="46" r="48" fill="none" stroke="#fff" stroke-opacity=".09" stroke-width="1.2"/>
+<ellipse cx="54" cy="88.5" rx="9" ry="2.2" fill="#000" fill-opacity=".25"/>
+<path fill="url(#pin)" d="M54,88 C46,78 30,62 30,46 A24,24 0 0 1 78,46 C78,62 62,78 54,88 Z"/>
+<circle cx="42" cy="34.5" r="4.5" fill="#FFB300"/>
+<path fill="#4C92E3" d="M38,45h9v15h-9zM61,40h9v20h-9z"/>
+<path fill="#1A5FB4" d="M47,30h14v30h-14zM53.2,24.5h1.6v5.5h-1.6z"/>
+<path fill="#0C3573" d="M37,60h34v1.8h-34z"/>
+<path fill="#fff" d="M49.6,33.5h2.6v2.6h-2.6zM55.8,33.5h2.6v2.6h-2.6zM49.6,39.5h2.6v2.6h-2.6zM55.8,39.5h2.6v2.6h-2.6zM49.6,45.5h2.6v2.6h-2.6zM55.8,45.5h2.6v2.6h-2.6zM41.2,48h2.6v2.6h-2.6zM41.2,53.5h2.6v2.6h-2.6zM64.2,43.5h2.6v2.6h-2.6zM64.2,49h2.6v2.6h-2.6zM64.2,54.5h2.6v2.6h-2.6z"/>
+<path fill="#FFB300" d="M52.2,53h2.6v7h-2.6z"/>
+</g></svg>

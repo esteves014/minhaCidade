@@ -1,6 +1,6 @@
 ---
-versao_artigo: 0.5
-data: 2026-11-03
+versao_artigo: 0.6
+data: 2026-11-13
 versao_app: 1.0 (versionCode 1; esquema do banco v4)
 status: rascunho em evolução — atualizado junto com o código
 ---
@@ -244,6 +244,13 @@ central e confirmando. A conversão de coordenadas em endereço usa a classe `Ge
 do aparelho e de rede, e o aplicativo tem alternativa quando não há resposta (usar as coordenadas
 como texto do endereço e avisar o cidadão para corrigi-lo). Buscas de endereço concorrentes (nova
 posição, endereço cadastrado ou remoção da posição) tornam obsoleta a busca anterior.
+
+A identidade visual do aplicativo é um alfinete de localização que contém o horizonte de uma cidade
+sob um sol, sobre um fundo em degradê no azul da marca (`brand_primary`). O ícone de lançamento é um
+ícone adaptativo vetorial (`ic_launcher_foreground`, `ic_launcher_background`), com versão
+monocromática própria (`ic_launcher_monochrome`) para o Android 13 ou superior; o desenho é de
+autoria do projeto e não foi avaliado com usuários. A mesma logo (`logo_app`) é exibida na tela de
+entrada, acima do nome do aplicativo.
 
 ### 4.3 Modelo de dados
 

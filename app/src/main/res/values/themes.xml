@@ -9,4 +9,9 @@
     </style>
 
     <style name="Theme.MinhaCidade" parent="Base.Theme.MinhaCidade" />
+
+    <style name="Forma.Logo" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

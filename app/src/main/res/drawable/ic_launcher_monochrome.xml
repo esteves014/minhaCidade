@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Versão monocromática (ícones temáticos do Android 13+): alfinete com o horizonte e o sol recortados. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,88 C46,78 30,62 30,46 A24,24 0 0 1 78,46 C78,62 62,78 54,88 Z
+                          M37,61.8 L37,60 L38,60 L38,45 L47,45 L47,30 L53.2,30 L53.2,24.5 L54.8,24.5 L54.8,30 L61,30 L61,40 L70,40 L70,60 L71,60 L71,61.8 Z
+                          M37.5,34.5a4.5,4.5 0 1,0 9,0a4.5,4.5 0 1,0 -9,0 Z
+                          M49.6,33.5h2.6v2.6h-2.6zM55.8,33.5h2.6v2.6h-2.6zM49.6,39.5h2.6v2.6h-2.6zM55.8,39.5h2.6v2.6h-2.6zM49.6,45.5h2.6v2.6h-2.6zM55.8,45.5h2.6v2.6h-2.6z
+                          M41.2,48h2.6v2.6h-2.6zM41.2,53.5h2.6v2.6h-2.6zM64.2,43.5h2.6v2.6h-2.6zM64.2,49h2.6v2.6h-2.6zM64.2,54.5h2.6v2.6h-2.6z" />
+</vector>
