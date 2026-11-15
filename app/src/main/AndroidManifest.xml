@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MinhaCidade">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -30,26 +30,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".view.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.CadastroActivity"
+            android:name=".view.CadastroActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.EditarPerfilActivity"
+            android:name=".view.EditarPerfilActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.VagaDetalheActivity" android:exported="false" />
-        <activity android:name=".ui.NoticiaDetalheActivity" android:exported="false" />
+        <activity android:name=".view.VagaDetalheActivity" android:exported="false" />
+        <activity android:name=".view.NoticiaDetalheActivity" android:exported="false" />
         <activity
-            android:name=".ui.DenunciaDetalheActivity"
+            android:name=".view.DenunciaDetalheActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".ui.MapaActivity" android:exported="false" />
+            android:parentActivityName=".view.MainActivity" />
+        <activity android:name=".view.MapaActivity" android:exported="false" />
         <activity
-            android:name=".ui.NovaDenunciaActivity"
+            android:name=".view.NovaDenunciaActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

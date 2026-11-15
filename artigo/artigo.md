@@ -1,7 +1,7 @@
 ---
-versao_artigo: 0.6
+versao_artigo: 0.7
 data: 2026-11-13
-versao_app: 1.0 (versionCode 1; esquema do banco v4)
+versao_app: 1.0 (versionCode 1; esquema do banco v5)
 status: rascunho em evolução — atualizado junto com o código
 ---
 
@@ -230,9 +230,15 @@ Quadro: Requisitos funcionais da versão 1.0 | Fonte: elaborado pelo autor, a pa
 
 Aplicativo Android nativo em Java (Java 11; `minSdk` 26, `targetSdk` 37), com interface em Material
 Components e navegação inferior por quatro abas (Vagas, Notícias, Denúncias, Perfil) implementadas
-como *fragments*. A persistência é local, em SQLite (`Db`, esquema versão 4). A classe `Db` foi
-escrita para que a camada de dados siga o contrato que uma futura API do site deverá seguir: toda
-consulta de conteúdo recebe o identificador da cidade. Não há, na versão 1.0, servidor remoto.
+como *fragments*. A persistência é local, em SQLite (esquema versão 5), organizada em camadas no
+padrão de um projeto de CRUD de referência fornecido ao autor (MVVM com repositório): `database`
+(`DatabaseHelper`, que cria o esquema e executa inserir, listar, atualizar e deletar, devolvendo
+`Cursor`), `model` (Cidade, Usuario, Vaga, Noticia, Denuncia e Parecer), `repository` (um por
+entidade, que converte o `Cursor` em objeto e aplica as regras, como aceitar cadastro só em cidade
+contratada), `viewmodel` (`LiveData` observado pelas telas) e `view` (atividades, *fragments* e
+adaptadores). O `DatabaseHelper` foi escrito para que a camada de dados siga o contrato que uma
+futura API do site deverá seguir: toda consulta de conteúdo recebe o identificador da cidade. Não há,
+na versão 1.0, servidor remoto.
 
 O mapa usa a biblioteca osmdroid (versão 6.1.20) com a camada de ruas do OpenStreetMap (*Mapnik*),
 o que dispensa chave de API e conta de cobrança, mas exige conexão para baixar os *tiles* e a
@@ -341,7 +347,7 @@ resolver a demanda; o aplicativo contribui com a **visibilidade e a rastreabilid
 Os indicadores abaixo usam apenas tabelas e colunas existentes (SQLite). Em produção deverão ser
 calculados sobre uma base central, já que o banco da versão 1.0 é local ao aparelho.
 
-Quadro: Consultas SQL dos indicadores propostos | Fonte: elaborado pelo autor, a partir do esquema do banco local (`Db`).
+Quadro: Consultas SQL dos indicadores propostos | Fonte: elaborado pelo autor, a partir do esquema do banco local (`DatabaseHelper`).
 
 ```sql
 -- Taxa de resolução por cidade (ODS 16.6)

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>minhaCidade — painel do congresso</title>
+<style>
+  :root {
+    --azul: #0a5b91;
+    --azul-esc: #0d3d5e;
+    --verde: #4fae45;
+    --verde-claro: #e9f5e6;
+    --azul-claro: #eaf3fa;
+    --tinta: #1c2f3f;
+    --cinza: #5a6b79;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 1600px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--tinta);
+    background: url("modelo-congresso.jpg") no-repeat 0 0 / 1200px 1600px;
+    position: relative;
+  }
+  /* Área branca do modelo: y de 205 a 1397 */
+  .area { position: absolute; left: 48px; right: 48px; top: 226px; height: 1148px; }
+
+  /* ---------- Título ---------- */
+  .titulo { display: flex; justify-content: space-between; align-items: flex-end; height: 150px; }
+  .marca { font-size: 96px; font-weight: 800; letter-spacing: -2px; line-height: 1; color: var(--azul); }
+  .marca b { color: var(--verde); font-weight: 800; }
+  .lema { margin-top: 8px; font-size: 29px; font-weight: 600; color: var(--azul-esc); line-height: 1.2; white-space: nowrap; }
+  .selo { text-align: right; font-size: 22px; line-height: 1.35; color: var(--cinza); padding-bottom: 6px; }
+  .selo strong { display: block; font-size: 25px; color: var(--azul-esc); }
+  .linha { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--azul), var(--verde)); margin: 12px 0 16px; }
+
+  /* ---------- Bloco central ---------- */
+  .centro { display: flex; gap: 24px; height: 434px; }
+  .celulares { position: relative; width: 640px; flex: none; zoom: .96; }
+  .cel {
+    position: absolute; width: 226px; height: 432px; border-radius: 34px; background: #1b2a37;
+    padding: 10px; box-shadow: 0 14px 30px rgba(13, 61, 94, .28);
+  }
+  .cel .tela { background: #fff; border-radius: 26px; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
+  .c1 { left: 0; top: 18px; transform: rotate(-4deg); }
+  .c2 { left: 206px; top: 0; z-index: 2; }
+  .c3 { left: 412px; top: 18px; transform: rotate(4deg); }
+  .barra { background: var(--azul); color: #fff; font-size: 17px; font-weight: 700; padding: 13px 14px; }
+  .conteudo { flex: 1; padding: 9px; display: flex; flex-direction: column; gap: 7px; background: #f4f7fa; overflow: hidden; }
+  .busca { background: #fff; border: 1px solid #d3dde6; border-radius: 8px; padding: 6px 9px; font-size: 13px; color: #8695a2; }
+  .chips { display: flex; gap: 5px; }
+  .chips span { font-size: 11.5px; background: var(--verde-claro); color: #2d7a26; border-radius: 10px; padding: 3px 8px; font-weight: 600; }
+  .item { background: #fff; border-radius: 9px; padding: 7px 9px; border: 1px solid #e0e8ef; }
+  .item h4 { font-size: 13px; line-height: 1.2; }
+  .item p { font-size: 11.5px; color: var(--cinza); margin-top: 2px; line-height: 1.25; }
+  .foto { height: 54px; border-radius: 6px; margin-bottom: 5px; background: linear-gradient(135deg, #cfe3f2, #e2f1de); }
+  .mapa { position: relative; height: 150px; border-radius: 10px; overflow: hidden; background: #e9eee2; border: 1px solid #d3dde6; }
+  .mapa i { position: absolute; background: #fff; }
+  .mapa .r1 { left: -10px; top: 52px; width: 260px; height: 14px; transform: rotate(-8deg); }
+  .mapa .r2 { left: 92px; top: -10px; width: 13px; height: 190px; transform: rotate(14deg); }
+  .mapa .r3 { left: 20px; top: 112px; width: 220px; height: 10px; transform: rotate(6deg); }
+  .mapa .q { background: #cfe5c4; border-radius: 4px; }
+  .mapa .q1 { left: 120px; top: 74px; width: 60px; height: 34px; }
+  .mapa .q2 { left: 14px; top: 8px; width: 52px; height: 32px; }
+  .pino { position: absolute; left: 96px; top: 34px; width: 26px; height: 26px; background: #d93a3a; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
+  .pino::after { content: ""; position: absolute; left: 8px; top: 8px; width: 10px; height: 10px; background: #fff; border-radius: 50%; }
+  .proto { font-size: 12.5px; font-weight: 700; color: var(--azul-esc); }
+  .status { display: inline-block; font-size: 11.5px; font-weight: 700; padding: 2px 8px; border-radius: 9px; background: #fff0d4; color: #a46a00; margin-top: 3px; }
+  .abas { display: flex; justify-content: space-around; padding: 8px 4px 9px; background: #fff; border-top: 1px solid #e0e8ef; font-size: 10.5px; color: var(--cinza); }
+  .abas .on { color: var(--azul); font-weight: 700; }
+
+  .pilares { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+  .pilar { flex: 1; display: flex; gap: 16px; align-items: center; background: var(--azul-claro); border-left: 8px solid var(--azul); border-radius: 14px; padding: 8px 18px; }
+  .pilar:nth-child(2) { background: var(--verde-claro); border-left-color: var(--verde); }
+  .pilar svg { flex: none; width: 66px; height: 66px; }
+  .pilar h3 { font-size: 28px; color: var(--azul-esc); line-height: 1.1; }
+  .pilar p { font-size: 21px; line-height: 1.22; color: var(--tinta); margin-top: 4px; }
+
+  /* ---------- Fluxo da denúncia ---------- */
+  .secao { font-size: 28px; font-weight: 800; color: var(--azul-esc); margin: 18px 0 10px; display: flex; align-items: center; gap: 14px; }
+  .secao::after { content: ""; flex: 1; height: 3px; background: #d9e5ee; border-radius: 2px; }
+  .fluxo { display: flex; align-items: stretch; gap: 0; }
+  .passo { flex: 1; background: #fff; border: 2px solid #d3e1ec; border-radius: 16px; padding: 12px 14px 10px; position: relative; }
+  .passo .n { width: 36px; height: 36px; flex: none; border-radius: 50%; background: var(--azul); color: #fff; font-size: 21px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .passo .cab { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .passo:nth-child(odd) .n { background: var(--verde); }
+  .passo h4 { font-size: 22px; line-height: 1.1; color: var(--azul-esc); }
+  .passo p { font-size: 20px; line-height: 1.22; color: var(--cinza); margin-top: 4px; }
+  .seta { width: 26px; flex: none; display: flex; align-items: center; justify-content: center; color: var(--verde); font-size: 30px; font-weight: 800; }
+  .nota { font-size: 19px; color: var(--cinza); margin-top: 6px; font-style: italic; }
+
+  /* ---------- ODS ---------- */
+  .ods { display: flex; gap: 16px; }
+  .ods .grande { flex: 1; display: flex; gap: 14px; align-items: center; border-radius: 14px; padding: 12px 14px; color: #fff; }
+  .ods .grande .num { font-size: 52px; font-weight: 800; line-height: 1; min-width: 70px; text-align: center; }
+  .ods .grande .num small { display: block; font-size: 15px; letter-spacing: 2px; font-weight: 700; margin-bottom: 2px; }
+  .ods .grande strong { display: block; font-size: 22px; line-height: 1.15; }
+  .ods .grande span { display: block; font-size: 18.5px; line-height: 1.2; margin-top: 3px; opacity: .96; }
+  .o16 { background: #00689d; } .o11 { background: #e88a0e; } .o8 { background: #a21942; }
+  .indiretas { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 20px; color: var(--cinza); }
+  .indiretas .mini { display: flex; gap: 7px; }
+  .indiretas .mini b { width: 40px; height: 40px; border-radius: 8px; color: #fff; font-size: 21px; display: flex; align-items: center; justify-content: center; }
+
+  /* ---------- Rodapé ---------- */
+  .rodape { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: center; border-top: 3px solid #d9e5ee; padding-top: 10px; font-size: 20px; color: var(--cinza); }
+  .rodape strong { color: var(--azul-esc); font-size: 23px; }
+  .tec { display: flex; gap: 8px; }
+  .tec span { background: #f0f4f8; border: 1px solid #d3dde6; border-radius: 14px; padding: 3px 12px; font-size: 19px; color: var(--azul-esc); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="area">
+
+  <!-- Título -->
+  <div class="titulo">
+    <div>
+      <div class="marca">minha<b>Cidade</b></div>
+      <div class="lema">Vagas, notícias e denúncias da sua cidade em um só aplicativo</div>
+    </div>
+    <div class="selo"><strong>Aplicativo Android</strong>Trabalho acadêmico<br>voltado aos ODS</div>
+  </div>
+  <div class="linha"></div>
+
+  <!-- Celulares + pilares -->
+  <div class="centro">
+    <div class="celulares">
+      <div class="cel c1"><div class="tela">
+        <div class="barra">Vagas</div>
+        <div class="conteudo">
+          <div class="busca">Buscar cargo, empresa, bairro</div>
+          <div class="chips"><span>CLT</span><span>Estágio</span><span>Aprendiz</span></div>
+          <div class="item"><h4>Vaga de exemplo A</h4><p>Empresa Exemplo · Centro<br>CLT</p></div>
+          <div class="item"><h4>Vaga de exemplo B</h4><p>Empresa Exemplo · Jardim<br>Estágio</p></div>
+          <div class="item"><h4>Vaga de exemplo C</h4><p>Empresa Exemplo · Centro<br>Temporário</p></div>
+          <div class="item"><h4>Vaga de exemplo D</h4><p>Empresa Exemplo · Vila<br>Aprendiz</p></div>
+        </div>
+        <div class="abas"><span class="on">Vagas</span><span>Notícias</span><span>Denúncias</span><span>Perfil</span></div>
+      </div></div>
+
+      <div class="cel c2"><div class="tela">
+        <div class="barra">Nova denúncia</div>
+        <div class="conteudo">
+          <div class="item"><h4>Buraco na rua</h4><p>Categoria</p></div>
+          <div class="mapa"><i class="q q1"></i><i class="q q2"></i><i class="r1"></i><i class="r2"></i><i class="r3"></i><span class="pino"></span></div>
+          <div class="item"><p>Localização (opcional): GPS ou ponto escolhido no mapa</p></div>
+          <div class="item"><div class="proto">Protocolo 2026-00001</div><span class="status">Em análise</span></div>
+        </div>
+        <div class="abas"><span>Vagas</span><span>Notícias</span><span class="on">Denúncias</span><span>Perfil</span></div>
+      </div></div>
+
+      <div class="cel c3"><div class="tela">
+        <div class="barra">Notícias</div>
+        <div class="conteudo">
+          <div class="chips"><span>Todos os jornais</span></div>
+          <div class="item"><div class="foto"></div><h4>Notícia de exemplo 1</h4><p>Jornal Exemplo</p></div>
+          <div class="item"><div class="foto"></div><h4>Notícia de exemplo 2</h4><p>Jornal Exemplo</p></div>
+          <div class="item"><h4>Notícia de exemplo 3</h4><p>Jornal Exemplo</p></div>
+        </div>
+        <div class="abas"><span>Vagas</span><span class="on">Notícias</span><span>Denúncias</span><span>Perfil</span></div>
+      </div></div>
+    </div>
+
+    <div class="pilares">
+      <div class="pilar">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#0a5b91" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><rect x="8" y="20" width="48" height="32" rx="5"/><path d="M24 20v-6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v6M8 34h48"/><rect x="28" y="31" width="8" height="7" fill="#0a5b91"/></svg>
+        <div><h3>Vagas</h3><p>Oportunidades da sua cidade, com busca e filtro por tipo de contrato.</p></div>
+      </div>
+      <div class="pilar">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#3f9a36" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M12 12h34v40H16a4 4 0 0 1-4-4V12z"/><path d="M46 24h8v24a4 4 0 0 1-4 4h-4"/><path d="M20 22h18M20 32h18M20 42h12"/></svg>
+        <div><h3>Notícias</h3><p>O noticiário dos jornais locais reunido por município.</p></div>
+      </div>
+      <div class="pilar">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#0a5b91" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M32 6c-10 0-18 8-18 18 0 13 18 34 18 34s18-21 18-34C50 14 42 6 32 6z"/><circle cx="32" cy="24" r="6.5" fill="#0a5b91"/></svg>
+        <div><h3>Denúncias</h3><p>Problemas urbanos com protocolo, local no mapa e resposta da prefeitura.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fluxo -->
+  <div class="secao">Como funciona uma denúncia</div>
+  <div class="fluxo">
+    <div class="passo"><div class="cab"><div class="n">1</div><h4>Cidadão registra</h4></div><p>Categoria, descrição, foto e local opcional</p></div>
+    <div class="seta">›</div>
+    <div class="passo"><div class="cab"><div class="n">2</div><h4>Gera protocolo</h4></div><p>Número único para acompanhar o caso</p></div>
+    <div class="seta">›</div>
+    <div class="passo"><div class="cab"><div class="n">3</div><h4>Prefeitura responde</h4></div><p>Parecer muda o status: Em análise ou Resolvida</p></div>
+    <div class="seta">›</div>
+    <div class="passo"><div class="cab"><div class="n">4</div><h4>Cidadão é avisado</h4></div><p>Notificação e selo de não lido no app</p></div>
+  </div>
+  <div class="nota">No protótipo, o parecer da prefeitura é simulado.</div>
+
+  <!-- ODS -->
+  <div class="secao">Conexão com a Agenda 2030</div>
+  <div class="ods">
+    <div class="grande o16"><div class="num"><small>ODS</small>16</div><div><strong>Instituições eficazes e transparentes</strong><span>Protocolo, status e pareceres tornam a resposta verificável</span></div></div>
+    <div class="grande o11"><div class="num"><small>ODS</small>11</div><div><strong>Cidades sustentáveis</strong><span>Canal para sinalizar problemas urbanos</span></div></div>
+    <div class="grande o8"><div class="num"><small>ODS</small>8</div><div><strong>Trabalho decente</strong><span>Vagas locais e de entrada para jovens</span></div></div>
+  </div>
+  <div class="indiretas">
+    <span>Relações indiretas ou potenciais:</span>
+    <div class="mini">
+      <b style="background:#4c9f38">3</b><b style="background:#26bde2">6</b><b style="background:#fd6925">9</b><b style="background:#dd1367">10</b><b style="background:#19486a">17</b>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <div class="rodape">
+    <div><strong>Vitor Esteves</strong></div>
+    <div class="tec"><span>Android · Java</span><span>SQLite</span><span>OpenStreetMap</span></div>
+    <div>Protótipo com dados fictícios</div>
+  </div>
+</div>
+</body>
+</html>
